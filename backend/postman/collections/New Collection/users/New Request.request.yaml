@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://localhost:3000/api/users/8875b5cb-4b5a-48d7-84a1-6efbca566758
+method: DELETE
+headers:
+  - key: Content-Type
+    value: application/json
+    disabled: true
+    description: ""
+body:
+  type: json
+  content: ""
+order: 2000

@@ -1,0 +1,7 @@
+name: host
+values:
+  - key: host
+    value: ''
+  - key: port
+    value: ''
+color: 120

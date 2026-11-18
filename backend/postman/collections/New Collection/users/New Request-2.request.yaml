@@ -1,0 +1,16 @@
+$kind: http-request
+name: New Request
+url: http://localhost:3000/api/v1/users/8875b5cb-4b5a-48d7-84a1-6efbca566758
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Andi Aljabar\",\r
+
+    \  \"email\": \"andi@example.com\"\r
+
+    }"
+order: 3000
