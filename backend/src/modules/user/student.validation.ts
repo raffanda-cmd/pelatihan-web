@@ -1,4 +1,3 @@
-
 import { z } from 'zod';
 
 // Validasi data registrasi mahasiswa
@@ -15,29 +14,33 @@ export const registerStudentSchema = z.object({
         .trim()
         .min(2, 'Nama minimal 2 karakter')
         .max(100, 'Nama maksimal 100 karakter'),
-        email: z.string().email("Format email tidak valid").trim(),
-        password: z.string().min(6, "Password minimal 6 karakter").trim(),
 
-    jenisKelamin: z
+    email: z
         .string()
         .trim()
-        .min(1, 'Jenis kelamin wajib diisi'),
+        .email('Format email tidak valid'),
+
+    password: z
+        .string()
+        .trim()
+        .min(6, 'Password minimal 6 karakter'),
 
     tanggalLahir: z
         .string()
         .date('Format tanggal harus YYYY-MM-DD'),
 
-    kelas: z
+    jurusan: z
         .string()
         .trim()
-        .min(1, 'Kelas wajib diisi')
-        .max(50, 'Kelas maksimal 50 karakter'),
+        .min(1, 'Jurusan wajib diisi')
+        .max(50, 'Jurusan maksimal 50 karakter'),
 
     alamat: z
         .string()
         .trim()
         .min(1, 'Alamat wajib diisi')
         .max(255, 'Alamat maksimal 255 karakter'),
+
     createdAt: z.date().optional(),
     createdBy: z.string().optional(),
     updatedAt: z.date().optional(),
@@ -53,33 +56,21 @@ export const studentIdScheme = z.object({
         .string()
         .uuid('ID tidak valid')
 });
+
 export const loginStudentSchema = z.object({
-    email: z.string().email("Format email tidak valid").trim(),
-    password: z.string().min(1, "Password wajib diisi"),
+    email: z.string().trim().email('Format email tidak valid'),
+    password: z.string().min(1, 'Password wajib diisi'),
 }).strict();
+
 export const updateStudentSchema = registerStudentSchema.partial().omit({
     createdAt: true,
     createdBy: true
 }).strict();
+
 export const deleteStudentSchema = studentIdScheme;
 
-// Type data registrasi mahasiswa
-export type RegisterStudentRequest = z.infer<
-    typeof registerStudentSchema
->;
-
-// Type data login mahasiswa
-export type LoginStudentRequest = z.infer<
-    typeof loginStudentSchema
->;
-
-// Type ID mahasiswa
-export type StudentIdRequest = z.infer<
-    typeof studentIdScheme
->;
-export type UpdateStudentRequest = z.infer<
-    typeof updateStudentSchema
->;
-export type DeleteStudentRequest = z.infer<
-    typeof deleteStudentSchema
->;
+export type RegisterStudentRequest = z.infer<typeof registerStudentSchema>;
+export type LoginStudentRequest = z.infer<typeof loginStudentSchema>;
+export type StudentIdRequest = z.infer<typeof studentIdScheme>;
+export type UpdateStudentRequest = z.infer<typeof updateStudentSchema>;
+export type DeleteStudentRequest = z.infer<typeof deleteStudentSchema>;

@@ -51,7 +51,7 @@ export class PostgresStudentRepository implements IStudentRepository {
                 a.email,
                 a.password,
                 s.tanggal_lahir AS "tanggalLahir",
-                s.kelas,
+                s.jurusan,
                 s.alamat,
                 s.created_at AS "createdAt",
                 s.created_by AS "createdBy",
@@ -87,7 +87,7 @@ export class PostgresStudentRepository implements IStudentRepository {
                 INSERT INTO students (
                     id, nim, nama, tanggal_lahir, jurusan, alamat, created_at, created_by
                 )
-                VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8)
+                VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7)
                 `,
                 [
                     studentId,
@@ -162,7 +162,7 @@ export class PostgresStudentRepository implements IStudentRepository {
                     alamat = COALESCE($6, alamat),
                     updated_at = NOW(),
                     updated_by = COALESCE($7, updated_by)
-                WHERE id = $8
+                WHERE id = $7
                 `,
                 [data.nim, data.nama,  data.tanggalLahir, data.jurusan, data.alamat, data.createdBy, id]
             );

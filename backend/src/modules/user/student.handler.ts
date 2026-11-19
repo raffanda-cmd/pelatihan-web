@@ -1,4 +1,3 @@
-
 import type {
     Request,
     Response
@@ -37,8 +36,7 @@ export class StudentHandler {
 
         const inputWithAudit = {
             ...validatedData,
-            jurusan: req.body.jurusan,
-            createdBy: validatedData.createdBy || 'system',
+            createdBy: validatedData.createdBy ?? 'system',
         };
 
         const student = await this.registerStudentUseCase.execute(
@@ -74,9 +72,11 @@ export class StudentHandler {
         res: Response
     ): Promise<void> => {
 
-        const id = req.params.id;
+        const id = Array.isArray(req.params.id)
+            ? req.params.id[0]
+            : req.params.id;
 
-        if (typeof id !== 'string') {
+        if (!id || typeof id !== 'string') {
             throw new Error('ID siswa tidak valid');
         }
 
@@ -123,7 +123,10 @@ export class StudentHandler {
             throw new Error('ID siswa tidak valid');
         }
 
-        const input = req.body;
+        const input = {
+            ...req.body,
+            updatedBy: req.body.updatedBy ?? 'system',
+        };
 
         const result = await this.updateStudentUseCase.execute(id, input);
 

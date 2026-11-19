@@ -27,9 +27,8 @@ export class RegisterStudentUseCase {
             nama: input.nama.trim(),
             email: input.email.trim(),
             password: hashedPassword, // Catatan: Sebaiknya password di-hash (misal pakai bcrypt) sebelum disimpan
-            jenisKelamin: input.jenisKelamin,
             tanggalLahir: input.tanggalLahir,
-            kelas: input.kelas.trim(),
+            jurusan: input.jurusan.trim(),
             alamat: input.alamat.trim(),
             createdBy: input.createdBy || 'system', // Diisi string (misal dari input atau default 'system')
     
