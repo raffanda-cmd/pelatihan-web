@@ -157,11 +157,11 @@ export class PostgresStudentRepository implements IStudentRepository {
                 SET 
                     nim = COALESCE($1, nim),
                     nama = COALESCE($2, nama),
-                    tanggal_lahir = COALESCE($4, tanggal_lahir),
-                    jurusan = COALESCE($5, jurusan),
-                    alamat = COALESCE($6, alamat),
+                    tanggal_lahir = COALESCE($3, tanggal_lahir),
+                    jurusan = COALESCE($4, jurusan),
+                    alamat = COALESCE($5, alamat),
                     updated_at = NOW(),
-                    updated_by = COALESCE($7, updated_by)
+                    updated_by = COALESCE($6, updated_by)
                 WHERE id = $7
                 `,
                 [data.nim, data.nama,  data.tanggalLahir, data.jurusan, data.alamat, data.createdBy, id]
